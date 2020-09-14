@@ -14,6 +14,15 @@ function App() {
                                       [7,0,0,0,0,0,0,0,0],
                                       [8,0,0,0,0,0,0,0,0],
                                       [9,0,0,0,0,0,0,0,0]]);
+
+  let updateTable = function(value: number, row: number, column: number) {
+    let newTable = table.map(function(arr) {
+      return arr.slice();
+    });
+    newTable[row][column] = value;
+    setTable(newTable);
+  }                                      
+
   return (
     <table>
         <caption>Sudoku</caption>
@@ -23,7 +32,10 @@ function App() {
         {utils.range(0, 2).map(groupId => (
           <tbody key={groupId}>
             {utils.range(0, 2).map(rowId => (
-              <Row key={rowId} row={table[groupId*3+rowId]}/>
+              <Row 
+                key={rowId} 
+                row={table[groupId*3+rowId]} 
+                valueChanged={(value, columnId) => updateTable(value, groupId*3+rowId, columnId)}/>
             ))}
           </tbody>
         ))}
