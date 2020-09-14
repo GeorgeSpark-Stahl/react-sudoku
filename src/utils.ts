@@ -19,6 +19,26 @@ export class utils {
     return true;
   }
 
+  static checkRows(grid: Array<Array<number>>) {
+    function reduce(accumulator:number[], currentValue:number) {
+        if (currentValue > 0) {
+          accumulator[currentValue - 1] += 1;
+        }     
+        return accumulator
+      }
+
+    return grid.map(row => {
+      const countArray = row.reduce<number[]>(reduce, [0, 0, 0, 0, 0, 0, 0, 0, 0])
+      const index = countArray.findIndex(count => count > 1);
+      return index >= 0 ? index + 1 : undefined;
+    });
+  }
+
+  static checkColumns(grid: Array<Array<number>>) {
+    const transposed = grid[0].map((_, colIndex) => grid.map(row => row[colIndex]));
+    return this.checkRows(transposed);
+  }
+
   // pick a random number between min and max (edges included)
   //random: (min, max) => min + Math.floor(Math.random() * (max - min + 1)),
 
