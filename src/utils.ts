@@ -1,14 +1,23 @@
 // Math science
 export class utils {
-    // Sum an array
-    static sum(arr: Array<number>) {
-        return arr.reduce((acc, curr) => acc + curr, 0)
-    }
+  // Sum an array
+  static sum(arr: Array<number>) {
+      return arr.reduce((acc, curr) => acc + curr, 0)
+  }
 
   // create an array of numbers between min and max (edges included)
-    static range(min: number, max: number){
-      return Array.from({length: max - min + 1}, (_, i) => min + i)
-    } 
+  static range(min: number, max: number){
+    return Array.from({length: max - min + 1}, (_, i) => min + i)
+  } 
+
+  static checkGrid(grid: Array<Array<number>>) {
+    for(let row of grid) {
+      if (row.find(box => box === 0)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   // pick a random number between min and max (edges included)
   //random: (min, max) => min + Math.floor(Math.random() * (max - min + 1)),
