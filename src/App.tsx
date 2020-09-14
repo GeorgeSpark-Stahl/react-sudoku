@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { utils } from './utils';
+import Row from './Row';
 
 function App() {
   const [table, setTable] = useState([[1,0,0,0,0,0,0,0,0],
@@ -22,17 +23,7 @@ function App() {
         {utils.range(0, 2).map(groupId => (
           <tbody key={groupId}>
             {utils.range(0, 2).map(rowId => (
-              <tr key={rowId}>
-                {utils.range(0, 8).map(columnId => (
-                  <td key={columnId}>
-                    <input 
-                      value={table[groupId*3+rowId][columnId]}
-                      readOnly={true}
-                      size={1} >
-                    </input>
-                  </td>
-                ))}
-              </tr>
+              <Row key={rowId} row={table[groupId*3+rowId]}/>
             ))}
           </tbody>
         ))}
