@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { utils } from './utils';
 
 function App() {
   return (
@@ -9,21 +10,19 @@ function App() {
         <colgroup><col/><col/><col/></colgroup>
         <colgroup><col/><col/><col/></colgroup>
         <colgroup><col/><col/><col/></colgroup>
-        <tbody>
-        <tr><td>1</td><td> </td><td>3</td><td>6</td><td></td><td>4</td><td>7</td><td></td><td>9</td></tr>
-        <tr><td></td><td>2</td><td> </td><td></td><td>9</td><td></td><td> </td><td>1</td><td></td></tr>
-        <tr><td>7</td><td> </td><td></td><td></td><td></td><td></td><td></td><td></td><td>6</td></tr>
-        </tbody>
-        <tbody>
-        <tr><td>2</td><td></td><td>4</td><td></td><td>3</td><td></td><td>9</td><td></td><td>8</td></tr>
-        <tr><td></td><td></td><td></td><td></td><td> </td><td></td><td></td><td></td><td></td></tr>
-        <tr><td>5</td><td> </td><td> </td><td>9 </td><td> </td><td>7</td><td> </td><td> </td><td>1</td></tr>
-        </tbody>
-        <tbody>
-        <tr><td>6</td><td> </td><td> </td><td> </td><td>5</td><td> </td><td> </td><td> </td><td>2</td></tr>
-        <tr><td></td><td></td><td></td><td></td><td>7</td><td> </td><td> </td><td> </td><td></td></tr>
-        <tr><td>9</td><td>  </td><td>  </td><td>8 </td><td> </td><td>2 </td><td>  </td><td> </td><td>5</td></tr>
-        </tbody>
+        {utils.range(1, 3).map(groupId => (
+          <tbody key={groupId}>
+            {utils.range(1, 3).map(rowId => (
+              <tr key={rowId}>
+                {utils.range(1, 9).map(columnId => (
+                  <td key={columnId}>
+                    {columnId}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        ))}
   </table>
   );
 }
