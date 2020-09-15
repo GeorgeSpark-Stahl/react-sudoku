@@ -1,3 +1,5 @@
+import { access } from "fs";
+
 // Math science
 export class utils {
   // Sum an array
@@ -19,16 +21,16 @@ export class utils {
     return true;
   }
 
-  static checkRows(grid: Array<Array<number>>) {
-    function reduce(accumulator:number[], currentValue:number) {
-        if (currentValue > 0) {
-          accumulator[currentValue - 1] += 1;
-        }     
-        return accumulator
-      }
+  static reduce(accumulator:number[], currentValue:number) {
+    if (currentValue > 0) {
+      accumulator[currentValue - 1] += 1;
+    }     
+    return accumulator
+  }
 
-    return grid.map(row => {
-      const countArray = row.reduce<number[]>(reduce, [0, 0, 0, 0, 0, 0, 0, 0, 0])
+  static checkRows(grid: Array<Array<number>>) {
+  return grid.map(row => {
+      const countArray = row.reduce<number[]>(this.reduce, [0, 0, 0, 0, 0, 0, 0, 0, 0])
       const index = countArray.findIndex(count => count > 1);
       return index >= 0 ? index + 1 : undefined;
     });
@@ -37,6 +39,25 @@ export class utils {
   static checkColumns(grid: Array<Array<number>>) {
     const transposed = grid[0].map((_, colIndex) => grid.map(row => row[colIndex]));
     return this.checkRows(transposed);
+  }
+
+  static getQuadrant(grid: Array<Array<number>>, x: number, y: number) {
+    return utils.range(3 * y, (3 * y) + 2).map(
+      y_index => utils.range(3 * x, (3 * x) + 2).map(
+      x_index => grid[y_index][x_index]))
+  }
+
+  static checkQuadrant(grid: Array<Array<number>>) {
+    const row = grid.reduce<number[]>((acc, cur) => acc.concat(cur), []);
+    const countArray = row.reduce<number[]>(this.reduce, [0, 0, 0, 0, 0, 0, 0, 0])
+    const index = countArray.findIndex(count => count > 1);
+    return index >= 0 ? index + 1 : undefined;
+  }
+
+  static checkQuadrants(grid: Array<Array<number>>) {
+    return [[0,0],[1,0],[2,0], [0,1],[1,1],[2,1], [0,2],[1,2],[2,2]].map(quadrant => {
+      return this.checkQuadrant(this.getQuadrant(grid, quadrant[0], quadrant[1]));
+    })
   }
 
   // pick a random number between min and max (edges included)
