@@ -6,9 +6,10 @@ type RowProps = {
   row: number[],
   valueChanged: (value: number, column: number) => void,
   rowError: number;
+  colErrors: number[];
 }
 
-function Row({row, valueChanged, rowError}: RowProps) {
+function Row({row, valueChanged, rowError, colErrors}: RowProps) {
   return (
     <tr>
       {utils.range(0, 8).map(columnId => (
@@ -16,7 +17,8 @@ function Row({row, valueChanged, rowError}: RowProps) {
           key={columnId} 
           guess={row[columnId]} 
           valueChanged={(number) => valueChanged(number, columnId) }
-          rowError={rowError}/>
+          rowError={rowError}
+          colError={colErrors[columnId]}/>
       ))}
     </tr>
   )

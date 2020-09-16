@@ -23,6 +23,7 @@ function App() {
   }                                      
 
   const rowErrors = utils.checkRows(table);
+  const colErrors = utils.checkColumns(table);
 
   return (
     <table>
@@ -37,7 +38,8 @@ function App() {
                 key={rowId} 
                 row={table[groupId*3+rowId]} 
                 valueChanged={(value, columnId) => updateTable(value, groupId*3+rowId, columnId)}
-                rowError={rowErrors[groupId*3+rowId]}/>
+                rowError={rowErrors[groupId*3+rowId]}
+                colErrors={colErrors}/>
             ))}
           </tbody>
         ))}
