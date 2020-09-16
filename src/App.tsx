@@ -14,13 +14,15 @@ function App() {
                                       [8,0,0,0,0,0,0,0,0],
                                       [9,0,0,0,0,0,0,0,0]]);
 
-  let updateTable = function(value: number, row: number, column: number) {
+  const updateTable = function(value: number, row: number, column: number) {
     let newTable = table.map(function(arr) {
       return arr.slice();
     });
     newTable[row][column] = value;
     setTable(newTable);
   }                                      
+
+  const rowErrors = utils.checkRows(table);
 
   return (
     <table>
@@ -34,7 +36,8 @@ function App() {
               <Row 
                 key={rowId} 
                 row={table[groupId*3+rowId]} 
-                valueChanged={(value, columnId) => updateTable(value, groupId*3+rowId, columnId)}/>
+                valueChanged={(value, columnId) => updateTable(value, groupId*3+rowId, columnId)}
+                rowError={rowErrors[groupId*3+rowId]}/>
             ))}
           </tbody>
         ))}

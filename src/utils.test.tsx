@@ -15,7 +15,7 @@ test('checkGrid returns falls with zeros', () => {
 test('checkRows finds no dupes', () => {
   const grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
   const dupes = utils.checkRows(grid);
-  expect(dupes).toEqual([undefined, undefined, undefined]);
+  expect(dupes).toEqual([-1, -1, -1]);
 })
 
 test('checkRows finds dupes', () => {
@@ -27,7 +27,7 @@ test('checkRows finds dupes', () => {
 test('checkColumns finds dupes', () => {
   const grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
   const dupes = utils.checkColumns(grid);
-  expect(dupes).toEqual([undefined, undefined, undefined]);
+  expect(dupes).toEqual([-1, -1, -1]);
 })
 
 test('checkColumns finds dupes', () => {
@@ -63,7 +63,7 @@ test('getQuadrant returns bottom middle quadrant', () => {
 
 test('checkQuadrant returns no error', () => {
    const results = utils.checkQuadrant([[1,2,3], [4,5,6], [7,8,9]]);
-   expect(results).toEqual(undefined);
+   expect(results).toEqual(-1);
 })
 
 test('checkQuadrant returns error', () => {

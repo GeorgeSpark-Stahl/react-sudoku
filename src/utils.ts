@@ -32,7 +32,7 @@ export class utils {
   return grid.map(row => {
       const countArray = row.reduce<number[]>(this.reduce, [0, 0, 0, 0, 0, 0, 0, 0, 0])
       const index = countArray.findIndex(count => count > 1);
-      return index >= 0 ? index + 1 : undefined;
+      return index >= 0 ? index + 1 : -1;
     });
   }
 
@@ -51,7 +51,7 @@ export class utils {
     const row = grid.reduce<number[]>((acc, cur) => acc.concat(cur), []);
     const countArray = row.reduce<number[]>(this.reduce, [0, 0, 0, 0, 0, 0, 0, 0])
     const index = countArray.findIndex(count => count > 1);
-    return index >= 0 ? index + 1 : undefined;
+    return index >= 0 ? index + 1 : -1;
   }
 
   static checkQuadrants(grid: Array<Array<number>>) {

@@ -4,14 +4,19 @@ import Box from './Box';
 
 type RowProps = {
   row: number[],
-  valueChanged: (value: number, column: number) => void 
+  valueChanged: (value: number, column: number) => void,
+  rowError: number;
 }
 
-function Row({row, valueChanged}: RowProps) {
+function Row({row, valueChanged, rowError}: RowProps) {
   return (
     <tr>
       {utils.range(0, 8).map(columnId => (
-        <Box key={columnId} guess={row[columnId]} valueChanged={(number) => valueChanged(number, columnId)}/>
+        <Box 
+          key={columnId} 
+          guess={row[columnId]} 
+          valueChanged={(number) => valueChanged(number, columnId) }
+          rowError={rowError}/>
       ))}
     </tr>
   )
