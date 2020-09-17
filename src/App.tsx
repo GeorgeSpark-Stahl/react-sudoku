@@ -24,6 +24,13 @@ function App() {
 
   const rowErrors = utils.checkRows(table);
   const colErrors = utils.checkColumns(table);
+  const quadErrors = utils.checkQuadrants(table);
+
+  const adjusted = [
+    [quadErrors[0], quadErrors[1], quadErrors[2]],
+    [quadErrors[3], quadErrors[4], quadErrors[5]],
+    [quadErrors[6], quadErrors[7], quadErrors[8]]
+  ];
 
   return (
     <table>
@@ -39,7 +46,8 @@ function App() {
                 row={table[groupId*3+rowId]} 
                 valueChanged={(value, columnId) => updateTable(value, groupId*3+rowId, columnId)}
                 rowError={rowErrors[groupId*3+rowId]}
-                colErrors={colErrors}/>
+                colErrors={colErrors}
+                rowQuadErrors={adjusted[groupId]}/>
             ))}
           </tbody>
         ))}

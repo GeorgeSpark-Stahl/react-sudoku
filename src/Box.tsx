@@ -5,11 +5,12 @@ type BoxProps = {
   guess: number,
   valueChanged: (value: number) => void ,
   rowError: number,
-  colError: number
+  colError: number,
+  quadError: number
 }
 
-function Box({guess, valueChanged, rowError, colError}: BoxProps) {
-  const hasError = rowError === guess || colError === guess;
+function Box({guess, valueChanged, rowError, colError, quadError}: BoxProps) {
+  const hasError = [rowError, colError, quadError].includes(guess);
   return (
     <td style={{backgroundColor: hasError ? 'red': 'transparent'}}>
       <input 
